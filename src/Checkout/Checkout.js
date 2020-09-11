@@ -4,6 +4,16 @@ import Subtotal from "./Subtotal";
 import { useStateValue } from "../StateProvider";
 import CheckoutProduct from "./CheckoutProduct";
 
+// import FlipMove from 'react-flip-move';
+
+// const FmOptions = {
+//   // enterLeaveAnimation: 'accordionHorizontal'
+//   // enterLeaveAnimation: 'accordionVertical'
+//   // enterLeaveAnimation: null
+//   enterLeaveAnimation: 'fade'
+
+// }
+
 function Checkout() {
   const [{ basket, user }, dispatch] = useStateValue();
 
@@ -20,15 +30,9 @@ function Checkout() {
           <h3>Hello, {user?.email}</h3>
           <h2 className="checkout__title">Your shopping Basket</h2>
 
-          {basket.map(item => (
-            <CheckoutProduct
-              id={item.id}
-              title={item.title}
-              image={item.image}
-              price={item.price}
-              rating={item.rating}
-            />
-          ))}
+          {/* <FlipMove enterAnimation={FmOptions.enterLeaveAnimation} leaveAnimation={FmOptions.enterLeaveAnimation} > */}
+          {basket.map((item, i) => <CheckoutProduct key={i} {...item} />)}
+          {/* </FlipMove> */}
 
         </div>
       </div>

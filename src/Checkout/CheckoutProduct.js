@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import './CheckoutProduct.css'
 import { useStateValue } from "../StateProvider";
 
-function CheckoutProduct({ id, image, title, price, rating }) {
+import StarIcon from '@material-ui/icons/Star';
+
+
+const CheckoutProduct = forwardRef(({ id, image, title, price, rating, hideButton }, ref) => {
+    // function CheckoutProduct({ id, image, title, price, rating, hideButton }) {
     const [{ basket }, dispatch] = useStateValue();
 
     const removeFromBasket = () => {
@@ -14,7 +18,7 @@ function CheckoutProduct({ id, image, title, price, rating }) {
     }
 
     return (
-        <div className='checkoutProduct'>
+        <div className='checkoutProduct' ref={ref}>
             <img className='checkoutProduct__image' src={image} />
 
             <div className='checkoutProduct__info'>
@@ -23,17 +27,18 @@ function CheckoutProduct({ id, image, title, price, rating }) {
                     <small>$</small>
                     <strong>{price}</strong>
                 </p>
-                <div className="checkoutProduct__rating">
+                <div className="checkoutProduct__rating star">
                     {Array(rating)
                         .fill()
                         .map((_, i) => (
-                            <p>⭐</p>
+                            <StarIcon key={i} />
+                            // <p key={i}>⭐</p>
                         ))}
                 </div>
-                <button onClick={removeFromBasket}>Remove from Basket</button>
+                {!hideButton && (<button className="accent-btn" onClick={removeFromBasket}>Remove from Basket</button>)}
             </div>
         </div>
     )
-}
+})
 
 export default CheckoutProduct

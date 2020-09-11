@@ -1,0 +1,19 @@
+.accent-btn {
+  /* border-color: #0000; */
+  border: none !important;
+  box-shadow: 1px 2px 9px -3px rgb(240 193 75 / 0.66),
+    0 0 20px -6px rgb(240 193 75 / 0.33);
+  /* box-shadow: 0 0 9px -3px #f0c14b, 0 0 20px -6px #f0c14b; */
+  cursor: pointer;
+  border-radius: 3px;
+  outline: #f0c14b;
+}
+
+.star {
+  display: flex;
+  color: #f0c14b;
+}
+
+.star>* {
+  font-size: large !important;
+}

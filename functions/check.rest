@@ -1,0 +1,4 @@
+GET http://localhost:5001/clones-25409/us-central1/api
+
+###
+GET http://localhost:5001/clones-25409/us-central1/api/hey

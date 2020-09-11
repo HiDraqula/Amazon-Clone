@@ -11,11 +11,22 @@
   min-width: 100px;
   background-color: white;
   z-index: 1;
+  transition: 0.35s;
+  border-radius: 7px;
 }
 
-.product__rating {
-  display: flex;
+.product:hover {
+  box-shadow: 1px 2px 16px -2px rgb(0 0 0 / 0.18);
 }
+
+/* .product__rating {
+  display: flex;
+  color: #f0c14b;
+} */
+
+/* .product__rating>* {
+  font-size: large;
+} */
 
 .product>img {
   max-height: 200px;
@@ -30,6 +41,10 @@
   margin-top: 10px;
   border-color: #a88734 #9c7e31 #846a29;
   color: #111;
+  /* color: #131921; */
+  padding: 0.21rem 0.7rem 0.18rem;
+  font-size: 14px;
+
 }
 
 .product__price {

@@ -1,12 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Login.css'
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import { auth } from "../firebase";
+import { useStateValue } from '../StateProvider';
 
 function Login() {
     const history = useHistory();
+    // const location = history.location;
+    const location = useLocation();
+
+    const [{ user }] = useStateValue();
+
+    // const query = new URLSearchParams(search);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
+
+    console.log({ history, location })
+
+
+
+
+    const Next = () => {
+        console.log(location)
+        let next = location.state?.next || '/';
+        history.push(next)
+        // history.push(location.state?.next || '/')
+        // history.push('/')
+    }
+
+    useEffect(() => {
+        if (user) {
+            Next()
+        }
+    }, [])
 
     const signIn = e => {
         e.preventDefault();
@@ -14,7 +40,8 @@ function Login() {
         auth
             .signInWithEmailAndPassword(email, password)
             .then(auth => {
-                history.push('/')
+                Next()
+
             })
             .catch(error => alert(error.message))
     }
@@ -27,7 +54,7 @@ function Login() {
             .then((auth) => {
                 // it successfully created a new user with email and password
                 if (auth) {
-                    history.push('/')
+                    Next()
                 }
             })
             .catch(error => alert(error.message))
@@ -43,7 +70,8 @@ function Login() {
             </Link>
 
             <div className='login__container'>
-                <h1>Sign-in</h1>
+                <h1>Sign-in Here</h1>
+                {/* <h1>{location.state?.next ? 'Please Sign-in First' : 'Sign-in Here'}</h1> */}
 
                 <form>
                     <h5>E-mail</h5>

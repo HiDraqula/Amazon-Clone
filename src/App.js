@@ -2,14 +2,21 @@ import React, { useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Home from "./Home/Home";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
 import Checkout from "./Checkout/Checkout";
 import Login from "./Login/Login";
 import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
+import Payment from "./Payment/Payment";
+
+import { loadStripe } from "@stripe/stripe-js"
+import { Elements } from "@stripe/react-stripe-js"
+import Orders from "./Orders/Orders";
+
+const promise = loadStripe('pk_test_f82Rzm9DPhUi513JT8wV1sXH00y2dFALiZ');
 
 function App() {
-  const [{ }, dispatch] = useStateValue();
+  const [{ user }, dispatch] = useStateValue();
 
   useEffect(() => {
     // will only run once when the app component loads...
@@ -45,6 +52,24 @@ function App() {
           <Route path="/checkout">
             <Header />
             <Checkout />
+          </Route>
+          {/* <Route path="/payment" render={() =>
+            !user ? <Redirect to={{ pathname: "/login", state: { next: '/payment' } }} />
+              : <>
+                <Header />
+                <Elements stripe={promise}>
+                  <Payment />
+                </Elements>
+              </>} /> */}
+          <Route path="/payment">
+            <Header />
+            <Elements stripe={promise}>
+              <Payment />
+            </Elements>
+          </Route>
+          <Route path="/orders">
+            <Header />
+            <Orders />
           </Route>
           <Route path="/">
             <Header />
