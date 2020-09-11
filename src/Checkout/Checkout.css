@@ -15,3 +15,11 @@
   padding: 10px;
   border-bottom: 1px solid lightgray;
 }
+
+.emptyCartImg {
+  width: 70vmin;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%);
+}

@@ -1,7 +1,10 @@
 const functions = require('firebase-functions');
 const express = require("express");
 const cors = require("cors");
-const stripe = require("stripe")('STRIPE_PRIVATE_KEY_HERE');
+
+
+const Keys = require("./my-keys")
+const stripe = require("stripe")(Keys.stripe.test.private);
 
 // // Create and Deploy Your First Cloud Functions
 // // https://firebase.google.com/docs/functions/write-firebase-functions

@@ -28,8 +28,8 @@ function Checkout() {
 
         <div>
           <h3>Hello, {user?.email}</h3>
-          <h2 className="checkout__title">Your shopping Basket</h2>
-
+          <h2 className="checkout__title">Your shopping Basket {!basket.length && "is Empty"}</h2>
+          {!basket.length && <img className="emptyCartImg" src="/images/kart1.svg" alt="" />}
           {/* <FlipMove enterAnimation={FmOptions.enterLeaveAnimation} leaveAnimation={FmOptions.enterLeaveAnimation} > */}
           {basket.map((item, i) => <CheckoutProduct key={i} {...item} />)}
           {/* </FlipMove> */}
