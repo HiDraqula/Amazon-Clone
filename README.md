@@ -1,5 +1,5 @@
 ## <a href="https://aclone.firebaseapp.com/">Live Here</a>
-![Amazon Clone](screenshot1.jpg?raw=true "Amazon Clone in ReactJs")
+![Amazon Clone](screenshot2.jpg?raw=true "Amazon Clone in ReactJs")
 
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
