@@ -34,6 +34,7 @@ app.post('/payments/create', async (req, res) => {
   const paymentIntent = await stripe.paymentIntents.create({
     amount: total, // subunits of the currency
     currency: "inr"
+    // currency: "usd"
   })
   // OK - Created
   res.status(201).send({

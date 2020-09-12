@@ -29,7 +29,7 @@ function Payment() {
       const response = await axios({
         method: 'post',
         // Stripe expects the total in a currencies subunits // here 1$ = 100cents
-        url: `/payments/create?total=${getBasketTotal(basket) * 100}`
+        url: `/payments/create?total=${Math.round(getBasketTotal(basket) * 100)}`
       });
       setClientSecret(response.data.clientSecret)
     }
@@ -53,26 +53,31 @@ function Payment() {
         }
       }).then(({ paymentIntent }) => {
         // paymentIntent = payment confirmation
-        db.collection('users')
-          .doc(user?.uid)
-          .collection('orders')
-          .doc(paymentIntent.id)
-          .set({
-            basket: basket,
-            amount: paymentIntent.amount,
-            created: paymentIntent.created
+        console.log({ paymentIntent })
+        if (paymentIntent) {
+          db.collection('users')
+            .doc(user?.uid)
+            .collection('orders')
+            .doc(paymentIntent.id)
+            .set({
+              basket: basket,
+              amount: paymentIntent.amount,
+              created: paymentIntent.created
+            })
+
+          setSucceeded(true)
+          setError(null)
+          setProcessing(false);
+
+          dispatch({
+            type: 'EMPTY_BASKET'
           })
 
-        setSucceeded(true)
-        setError(null)
-        setProcessing(false);
-
-        dispatch({
-          type: 'EMPTY_BASKET'
-        })
-
-        history.replace('/orders')
-      })
+          history.replace('/orders')
+        } else {
+          console.error("STRIPE ERROR OCCURED")
+        }
+      }).catch(err => console.error(err))
     }
   }
   const handleChange = event => {

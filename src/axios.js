@@ -1,5 +1,7 @@
 import axios from "axios";
 
+console.log(process.env)
+
 const instance = axios.create({
   // API Cloud Function URL
   baseURL:
