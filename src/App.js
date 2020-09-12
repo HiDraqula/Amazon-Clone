@@ -2,12 +2,15 @@ import React, { useEffect } from "react";
 import "./App.css";
 import Header from "./components/Header";
 import Home from "./Home/Home";
-import { BrowserRouter as Router, Switch, Route, Redirect } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Checkout from "./Checkout/Checkout";
 import Login from "./Login/Login";
 import { auth } from "./firebase";
 import { useStateValue } from "./StateProvider";
 import Payment from "./Payment/Payment";
+
+// const Home = lazy(() => import('./routes/Home'));
+// const About = lazy(() => import('./routes/About'));
 
 import { loadStripe } from "@stripe/stripe-js"
 import { Elements } from "@stripe/react-stripe-js"
